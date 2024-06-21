@@ -14,8 +14,29 @@ const inputHandler = () => {
 
   // show number of charaters left
   counterEl.textContent = charsLeft;
-
-  console.log(charsLeft);
 };
 
 textareaEl.addEventListener("input", inputHandler);
+
+// -- Submit Component --
+const formEl = document.querySelector(".form");
+
+const submitHandler = (event) => {
+  // preven default broser action submit
+  event.preventDefault();
+
+  // get text from textarea
+  const text = textareaEl.value;
+
+  //validate text (ex. check if is #hastag i present and text is long enoiugh)
+
+  if (text.includes("#") && text.length >= 5) {
+    formEl.classList.add("form--valid");
+    setTimeout(() => formEl.classList.remove("form--valid"), 2000);
+  } else {
+    formEl.classList.add("form--invalid");
+    setTimeout(() => formEl.classList.remove("form--invalid"), 2000);
+  }
+};
+
+formEl.addEventListener("submit", submitHandler);
